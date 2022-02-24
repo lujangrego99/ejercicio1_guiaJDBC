@@ -7,11 +7,11 @@ import tienda.servicios.ProductoServicio;
 
 public class ProductoDaoExt extends DAO {
     
-//    private final ProductoServicio productoServicio;
-//
-//    public MascotaDAO() {
-//        this.usuarioService = new UsuarioService();
-//    }
+    private final ProductoServicio productoServicio;
+
+    public ProductoDaoExt() {
+        this.productoServicio = new ProductoServicio();
+    }
 
     public void guardarProducto(Producto producto) throws Exception {
         try {
@@ -71,7 +71,7 @@ public class ProductoDaoExt extends DAO {
                 
                // Integer idUsuario = resultado.getInt(4);
                 
-                //Producto producto = productoServicio.buscarProductoPorId(int codigo);
+             //  Producto producto = ProductoServicio.buscarProductoPorId(codigo);
                 
                // producto.setUsuario(usuario);
             }
@@ -100,7 +100,7 @@ public class ProductoDaoExt extends DAO {
                 
                 //Usuario usuario = usuarioService.buscarUsuarioPorId(idUsuario);
                // mascota.setUsuario(usuario);
-                //mascotas.add(mascota);
+                productos.add(producto);
             }
             desconectarBase();
             return productos;
