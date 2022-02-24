@@ -71,7 +71,7 @@ public class ProductoDaoExt extends DAO {
                 
                // Integer idUsuario = resultado.getInt(4);
                 
-             //  Producto producto = ProductoServicio.buscarProductoPorId(codigo);
+                  producto = productoServicio.buscarProductoPorId(producto.getCodigo());
                 
                // producto.setUsuario(usuario);
             }
@@ -98,7 +98,7 @@ public class ProductoDaoExt extends DAO {
                 
                 // Integer idUsuario = resultado.getInt(4);
                 
-                //Usuario usuario = usuarioService.buscarUsuarioPorId(idUsuario);
+                producto = productoServicio.buscarProductoPorId(producto.getCodigo());
                // mascota.setUsuario(usuario);
                 productos.add(producto);
             }

@@ -3,14 +3,15 @@ package tienda.persistencia;
 import java.util.ArrayList;
 import java.util.Collection;
 import tienda.entidades.Fabricante;
+import tienda.servicios.FabricanteServicio;
 
-public class FabricanteDaoExt  extends DAO{
-    
- //private final UsuarioService usuarioService;
+public class FabricanteDaoExt extends DAO {
 
-//    public MascotaDAO() {
-//        this.usuarioService = new UsuarioService();
-//    }
+    private final FabricanteServicio fabricanteServicio;
+
+    public FabricanteDaoExt() {
+        this.fabricanteServicio = new FabricanteServicio();
+    }
 
     public void guardarFabricante(Fabricante fabricante) throws Exception {
         try {
@@ -18,7 +19,7 @@ public class FabricanteDaoExt  extends DAO{
                 throw new Exception("Debe indicar el fabricante");
             }
             String sql = "INSERT INTO Fabricante (codigo, nombre) "
-                    + "VALUES ( '" + fabricante.getCodigo() + "' , '" + fabricante.getNombre() +  " );";
+                    + "VALUES ( '" + fabricante.getCodigo() + "' , '" + fabricante.getNombre() + " );";
 
             System.out.println(sql);
             insertarModificarEliminar(sql);
@@ -35,8 +36,8 @@ public class FabricanteDaoExt  extends DAO{
                 throw new Exception("Debe indicar el Fabricante que desea modificar");
             }
             String sql = "UPDATE Fabricante SET "
-                    + "  nombre = '" + fabricante.getNombre() 
-                    + " WHERE id = '" + fabricante.getCodigo()+ "'";
+                    + "  nombre = '" + fabricante.getNombre()
+                    + " WHERE id = '" + fabricante.getCodigo() + "'";
             insertarModificarEliminar(sql);
         } catch (Exception e) {
             throw e;
@@ -65,10 +66,10 @@ public class FabricanteDaoExt  extends DAO{
                 fabricante = new Fabricante();
                 fabricante.setCodigo(resultado.getInt(1));
                 fabricante.setNombre(resultado.getString(2));
-                
+
 //                mascota.setRaza(resultado.getString(3));
 //                Integer idUsuario = resultado.getInt(4);
-//                Usuario usuario = usuarioService.buscarUsuarioPorId(idUsuario);
+                 fabricante = fabricanteServicio.buscarFabricantePorId(codigo);
 //                mascota.setUsuario(usuario);
             }
             desconectarBase();
@@ -79,9 +80,9 @@ public class FabricanteDaoExt  extends DAO{
         }
     }
 
-    public Collection<Fabricante> listarFabricante() throws Exception {
+    public Collection<Fabricante> listarFabricantes() throws Exception {
         try {
-            String sql = "SELECT * FROM Mascota ";
+            String sql = "SELECT * FROM Fabricante ";
             consultarBase(sql);
             Fabricante fabricante = null;
             Collection<Fabricante> fabricantes = new ArrayList();
@@ -89,12 +90,12 @@ public class FabricanteDaoExt  extends DAO{
                 fabricante = new Fabricante();
                 fabricante.setCodigo(resultado.getInt(1));
                 fabricante.setNombre(resultado.getString(2));
-                
+
 //                
 //                Integer idUsuario = resultado.getInt(4);
-//                Usuario usuario = usuarioService.buscarUsuarioPorId(idUsuario);
+                fabricante = fabricanteServicio.buscarFabricantePorId(resultado.getInt(1));
 //                mascota.setUsuario(usuario);
-                
+
                 fabricantes.add(fabricante);
             }
             desconectarBase();
@@ -105,7 +106,5 @@ public class FabricanteDaoExt  extends DAO{
             throw e;
         }
     }
-    
-    
-    
+
 }
